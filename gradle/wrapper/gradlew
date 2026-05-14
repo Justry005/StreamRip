@@ -1,7 +1,11 @@
 #!/usr/bin/env sh
+set -e
 
-DIR="$(cd "$(dirname "$0")" && pwd)"
+DIR="$(cd "$(dirname "$0")/../.." && pwd)"
+cd "$DIR"
 
-java -version
+if command -v mise >/dev/null 2>&1; then
+    exec mise exec -- gradle "$@"
+fi
 
-gradle "$@"
+exec gradle "$@"

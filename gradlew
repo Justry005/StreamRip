@@ -1,3 +1,8 @@
 #!/usr/bin/env sh
+set -e
 
-gradle "$@"
+if command -v mise >/dev/null 2>&1; then
+    exec mise exec -- gradle "$@"
+fi
+
+exec gradle "$@"
